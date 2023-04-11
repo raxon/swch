@@ -1,0 +1,59 @@
+<section>
+  <nav class="w-full z-20 top-0 left-0 border-b bg-gray-800">
+    <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+      <a href="/" class="flex items-center">
+        <h1 class="text-white font-bold text-xl font-sans p-4 bg-gray-800">
+          😻 Random <span class="bg-yellow-500 px-2">cat-fact</span> Finder
+        </h1>
+      </a>
+      <div class="flex md:order-2">
+        <button
+        (click)="onLogout()"
+          type="button"
+          class="text-yellow-800 bg-yellow-100 hover:bg-yellow-200 tranistion-all font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0"
+        >
+          🙀Leave me
+        </button>
+      </div>
+    </div>
+  </nav>
+  <section class="flex justify-center">
+    <div class="container">
+      <ng-container *ngFor="let fact of catsData; let i = index">
+        <div
+          class="w-42 text-2xl"
+          ScrollVisible
+          (elementVisible)="addCatFact($event)"
+          [isTargetElement]="i + 1 == catsData.length"
+        >
+          <h1
+            class="text-white font-bold text-2xl font-sans p-4 bg-gray-800 mt-10 py-8"
+          >
+            <div
+              class="text-white font-bold text-md font-sans p-2 bg-yellow-500 w-fit -mt-14 rotate-3"
+            >
+              FACT {{ i + 1 }}
+            </div>
+            {{ fact }}
+          </h1>
+        </div>
+      </ng-container>
+      <div *ngIf="loading">
+        <h1
+          class="text-white font-bold text-2xl font-sans p-4 bg-yellow-500 mt-10 py-8"
+        >
+          Searching for more facts may take some time. <span>🐈</span>
+        </h1>
+      </div>
+
+      <div *ngIf="falseCounter >= 300">
+        <h1
+          class="text-white font-bold text-2xl font-sans p-4 bg-yellow-500 mt-10 py-8"
+        >
+          No more facts available 😿
+        </h1>
+        <img class="mt-4" src="https://cataas.com/cat/cute/says/sorry" />
+      </div>
+    </div>
+  </section>
+</section>
